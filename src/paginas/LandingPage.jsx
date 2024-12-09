@@ -39,7 +39,29 @@ const LandingPage = () => {
 
     // Parámetros para las partículas de humo
     const particleCount = 1000;
-    const particles = new THREE.Geometry();
+
+    // Usar BufferGeometry en lugar de Geometry
+    const particles = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3); // 3 valores por partícula (X, Y, Z)
+    const velocities = new Float32Array(particleCount * 3); // Velocidades de las partículas
+
+    for (let i = 0; i < particleCount; i++) {
+      const pX = Math.random() * 500 - 250;
+      const pY = Math.random() * 500 - 250;
+      const pZ = Math.random() * 500 - 250;
+
+      positions[i * 3] = pX;
+      positions[i * 3 + 1] = pY;
+      positions[i * 3 + 2] = pZ;
+
+      velocities[i * 3] = (Math.random() - 0.5) * 0.1;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.1;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.1;
+    }
+
+    particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    
+    // Material de partículas
     const pMaterial = new THREE.PointsMaterial({
       color: 0xaaaaaa,
       size: 1,
@@ -48,21 +70,22 @@ const LandingPage = () => {
       transparent: true,
     });
 
-    // Crear partículas
-    for (let i = 0; i < particleCount; i++) {
-      const pX = Math.random() * 500 - 250;
-      const pY = Math.random() * 500 - 250;
-      const pZ = Math.random() * 500 - 250;
-      const particle = new THREE.Vector3(pX, pY, pZ);
-      particles.vertices.push(particle);
-    }
-
     // Crear el sistema de partículas
     const particleSystem = new THREE.Points(particles, pMaterial);
     scene.add(particleSystem);
 
     // Animación del sistema de partículas (movimiento del humo)
     const animateParticles = () => {
+      const positions = particleSystem.geometry.attributes.position.array;
+      
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] += velocities[i * 3];
+        positions[i * 3 + 1] += velocities[i * 3 + 1];
+        positions[i * 3 + 2] += velocities[i * 3 + 2];
+      }
+      
+      particleSystem.geometry.attributes.position.needsUpdate = true;
+
       particleSystem.rotation.y += 0.01;
       viewer.renderer.render(scene, camera);
       requestAnimationFrame(animateParticles);
