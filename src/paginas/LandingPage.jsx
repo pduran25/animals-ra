@@ -1,85 +1,76 @@
-import React, { useState } from 'react';
-import sound from '/assets/chiverito.mp3';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import backgroundImage from '../assets/fondofinal.png';
-import nombreapellido from '../assets/nombreapellido.png';
-import celular from '../assets/celular.png';
-import cuenta from '../assets/instagram.png';
-import ciudad from '../assets/ciudad.png';
-import btnenviar from '../assets/btnenviar.png';
-import regalo from '../assets/regalo.png';
-import base from '../assets/base.png';
 import logoImage from '../assets/logoImage.png';
-import parteImage from '../assets/parteImage.png';
-
-
 
 const LandingPage = () => {
-
   const [enviadoExitosamente, setEnviadoExitosamente] = useState(false);
- // const history = useHistory();
+  const canvasRef = useRef(null);
   const [formData, setFormData] = useState({
     nombres: '',
     celular: '',
-    cuenta: '',// Valor predeterminado
-    ciudad: '', 
+    cuenta: '',
+    ciudad: '',
     animacion: 0
   });
-  var source = "";
-  var source2 = "";
 
-  const search = window.location.search;
-  const params = new URLSearchParams(search);
-  const codigo = params.get('animacion');
-  const paso = params.get('paso');
-  console.log("animacion numero: "+codigo);
+  useEffect(() => {
+    // Setup de la escena de Three.js
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
 
+    // Crear el efecto de humo con partículas
+    const particleCount = 1000;
+    const particles = new THREE.Geometry();
+    const pMaterial = new THREE.PointsMaterial({
+      color: 0xaaaaaa,
+      size: 0.2,
+      transparent: true,
+      opacity: 0.5
+    });
 
-  if(codigo == 1){
-    source = "./assets/guachosaco.glb";
-    source2 = "./assets/guachosaco.usdz";
-  }else if(codigo == 2){
-    source = "./assets/guachosorpresa.glb";
-    source2 = "./assets/guachosorpresa.usdz";
-  }else if(codigo == 3){
-    source = "./assets/guachocarta.glb";
-    source2 = "./assets/guachocarta.usdz";
-  }else if(codigo == 4){
-    source = "./assets/guachitoarbol.glb";
-    source2 = "./assets/guachitoarbol.usdz";
-  }
+    for (let i = 0; i < particleCount; i++) {
+      const pX = Math.random() * 2 - 1;
+      const pY = Math.random() * 2 - 1;
+      const pZ = Math.random() * 2 - 1;
 
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-
-  const toggleAudio = () => {
-    const audioElement = document.getElementById('myAudio');
-  
-    if (isAudioPlaying) {
-      audioElement.pause();
-    } else {
-      audioElement.play();
+      const particle = new THREE.Vector3(pX, pY, pZ);
+      particles.vertices.push(particle);
     }
-  
-    setIsAudioPlaying(!isAudioPlaying);
-  };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const particleSystem = new THREE.Points(particles, pMaterial);
+    scene.add(particleSystem);
 
-  const handleSubmit = async (e) =>  {
+    camera.position.z = 5;
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      particleSystem.rotation.x += 0.001;
+      particleSystem.rotation.y += 0.001;
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    return () => {
+      // Limpieza cuando el componente se desmonte
+      renderer.dispose();
+      scene.dispose();
+    };
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validación de campos (puedes personalizar esto según tus necesidades)
     if (!formData.nombres || !formData.celular || !formData.cuenta || !formData.ciudad) {
       alert('Todos los campos son obligatorios');
       return;
-    }else{
+    } else {
       try {
-        // Envío de datos al servidor
-        console.log("entra al envio");
-        formData.animacion = codigo;
+        formData.animacion = 1; // Set your animation ID here
         const response = await fetch('https://app.cotzul.com/Otros/registroloteria.php', {
           method: 'POST',
           headers: {
@@ -87,223 +78,92 @@ const LandingPage = () => {
           },
           body: JSON.stringify(formData),
         });
-  
-        // Verificar la respuesta del servidor
+
         if (response.ok) {
           setEnviadoExitosamente(true);
-          window.location.href = '?animacion='+codigo+"&paso=1";
-          //history.push('https://navidadextraordinaria-loteria.netlify.app/?animacion=5');
-          // Puedes manejar la respuesta del servidor aquí, por ejemplo, redirigiendo a otra página
-         // history.push('/pagina-limpia');
-  
+          window.location.href = '?animacion=' + formData.animacion + "&paso=1";
         } else {
-          // Manejar errores de respuesta del servidor
-          console.log("ingreso al error");
-         
+          console.log("Error en la respuesta del servidor");
         }
       } catch (error) {
-        // Manejar errores de red o del lado del cliente
         console.error('Error de red o del lado del cliente', error);
-        
       }
     }
-
-    
-
-
-    // Aquí puedes realizar acciones adicionales con los datos del formulario
-    // Por ahora, simplemente redireccionamos a una página limpia
   };
 
   return (
-    
-      <>
-      {(enviadoExitosamente || paso == 1)?((codigo!=null)?
-        (<div style={{
+    <>
+      <div
+        style={{
           background: `url(${backgroundImage}) repeat fixed center center / cover`,
           height: '100%',
           justifyContent: 'center',
           flexDirection: 'column',
           alignItems: 'center',
-        }}>
-      <div style={{ marginBottom: '20px' }}>
-        <div style={{ marginBottom: '20px' }}>
-      <img
-        src={logoImage}
-        alt="Logo"
-        style={{ width: '100vw' }}
-      />
+        }}
+      >
+        {enviadoExitosamente ? (
+          <div>
+            <img src={logoImage} alt="Logo" style={{ width: '100vw' }} />
+            <h1 style={{ textAlign: 'center', color: '#FFF' }}>¡Envío Exitoso!</h1>
+            <p style={{ textAlign: 'center', color: '#FFF' }}>Gracias por registrarte. Tomate la foto con Guachito y súbelo a tu Instagram.</p>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              padding: '20px',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              borderRadius: '8px',
+              width: '80%',
+              margin: 'auto',
+            }}
+          >
+            <div>
+              <label>Nombre:</label>
+              <input
+                type="text"
+                name="nombres"
+                value={formData.nombres}
+                onChange={(e) => setFormData({ ...formData, nombres: e.target.value })}
+              />
+            </div>
+            <div>
+              <label>Celular:</label>
+              <input
+                type="tel"
+                name="celular"
+                value={formData.celular}
+                onChange={(e) => setFormData({ ...formData, celular: e.target.value })}
+              />
+            </div>
+            <div>
+              <label>Cuenta:</label>
+              <input
+                type="text"
+                name="cuenta"
+                value={formData.cuenta}
+                onChange={(e) => setFormData({ ...formData, cuenta: e.target.value })}
+              />
+            </div>
+            <div>
+              <label>Ciudad:</label>
+              <input
+                type="text"
+                name="ciudad"
+                value={formData.ciudad}
+                onChange={(e) => setFormData({ ...formData, ciudad: e.target.value })}
+              />
+            </div>
+            <button type="submit">Enviar</button>
+          </form>
+        )}
       </div>
-        <h1 style={{ textAlign: 'center', color: '#FFF' }}>¡Envío Exitoso!</h1>
-        <p style={{ textAlign: 'center', color: '#FFF'  }}>Gracias por registrarte. Tomate la foto con Guachito y súbelo a tu Instagram.</p>
-        <div className="App" style={{ width: '100%', height: '100%' }}>
-        <model-viewer
-          src={source}
-          ios-src={source2}
-          camera-controls
-          camera-orbit="-40deg 70deg 200m"
-          camera-target="0 0 0"
-          ar
-          ar-modes="scene-viewer webxr quick-look"
-          xr-environment
-          ar-placement="wall"
-          autoplay
-        >
 
-
-          <Boton slot="ar-button">
-            Ingresa
-          </Boton>
-        </model-viewer>
-      </div>
-      </div></div>):(<div></div>)):((codigo!=null)?(<div style={{
-        background: `url(${backgroundImage}) repeat fixed center center / cover`,
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}><div
-       
-    ><form style={{ // Ajusta el ancho del formulario según tus necesidades
-      padding: '0px',
-      backgroundColor: 'rgba(255, 255, 255, 0)', // Fondo semi-transparente para mayor legibilidad
-    }} onSubmit={handleSubmit}>
-      <div style={{ marginBottom: '20px' }}>
-      <img
-        src={logoImage}
-        alt="Logo"
-        style={{ width: '100vw' }}
-      />
-      </div>
-      <div style={{ marginBottom: '20px' }}>
-      <img
-        src={parteImage}
-        alt="parteImage"
-        style={{ width: '100vw'}}
-      />
-      </div>
-      <div style={{ position: 'relative', marginBottom: '20px' }}>
-          <img src={nombreapellido} alt="Nombres y Apellidos" style={{ width: '100vw' }} />
-          <input
-            type="text"
-            name="nombres"
-            value={formData.nombres}
-            onChange={handleInputChange}
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0)',
-              position: 'absolute',
-              bottom: '0',
-              left: '12%', // Ajusta la posición del campo de entrada en la imagen
-              right: '12%', // Ajusta la posición del campo de entrada en la imagen
-              width: '80%', // Ajusta el ancho del campo de entrada en la imagen
-              border: 'none', // Elimina el borde
-              outline: 'none', // Elimina el contorno de enfoque
-              fontSize: '2em'
-            }}
-          />
-        </div>
-        <div style={{ position: 'relative', marginBottom: '20px' }}>
-          <img src={celular} alt="Celular" style={{ width: '100vw' }} />
-          <input
-            type="tel"
-            name="celular"
-            value={formData.celular}
-            onChange={handleInputChange}
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0)',
-              position: 'absolute',
-              bottom: '0',
-              left: '12%', // Ajusta la posición del campo de entrada en la imagen
-              width: '80%', // Ajusta el ancho del campo de entrada en la imagen
-              border: 'none', // Elimina el borde
-              outline: 'none', // Elimina el contorno de enfoque
-              fontSize: '2em'
-            }}
-          />
-        </div>
-        <div style={{ position: 'relative', marginBottom: '20px' }}>
-          <img src={cuenta} alt="Cuenta" style={{ width: '100vw' }} />
-          <input
-            type="text"
-            name="cuenta"
-            value={formData.cuenta}
-            onChange={handleInputChange}
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0)',
-              position: 'absolute',
-              bottom: '0',
-              left: '12%', // Ajusta la posición del campo de entrada en la imagen
-              width: '80%', // Ajusta el ancho del campo de entrada en la imagen
-              border: 'none', // Elimina el borde
-              outline: 'none', // Elimina el contorno de enfoque
-              fontSize: '2em'
-            }}
-          />
-        </div>
-        <div style={{ position: 'relative', marginBottom: '20px' }}>
-          <img src={ciudad} alt="Ciudad" style={{ width: '100vw' }} />
-          <input
-            type="text"
-            name="ciudad"
-            value={formData.ciudad}
-            onChange={handleInputChange}
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0)',
-              position: 'absolute',
-              bottom: '0',
-              left: '12%', // Ajusta la posición del campo de entrada en la imagen
-              width: '80%', // Ajusta el ancho del campo de entrada en la imagen
-              border: 'none', // Elimina el borde
-              outline: 'none', // Elimina el contorno de enfoque
-              fontSize: '2em'
-            }}
-          />
-        </div>
-        <img
-          src={btnenviar}
-          alt="Enviar"
-          style={{ cursor: 'pointer', width: '100vw', marginBottom: '350px' }}
-          onClick={handleSubmit}
-        />
-       
-      
-      </form></div></div>):(<div></div>))}
-      </>
-    
-    
+      <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0 }} />
+    </>
   );
 };
 
 export default LandingPage;
 
-const SoundButton = styled.img`
-display: inline-block;
-`;
-
-const Boton = styled.button`
-
-display: inline-block;
-border: none;
-border-radius: 4px;
-background-color: #006a22;
-color: #fff;
-width: 70%;
-margin: 15%;
-margin-top: 0;
-font-size: 16px;
-font-weight: bold;
-text-align: center;
-text-decoration: none;
-cursor: pointer;
-alignItems: 'center',
-
-&:hover {
-  background-color: #006a22;
-}
-
-&:focus {
-  outline: none;
-  background-color: #006a22;
-}
-`;
