@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
-import sound from '/assets/chiverito.mp3';
 import styled from 'styled-components';
 import backgroundImage from '../assets/fondofinal.png';
-import nombreapellido from '../assets/nombreapellido.png';
-import celular from '../assets/celular.png';
-import cuenta from '../assets/instagram.png';
-import ciudad from '../assets/ciudad.png';
-import btnenviar from '../assets/btnenviar.png';
-import regalo from '../assets/regalo.png';
-import base from '../assets/base.png';
 import logoImage from '../assets/logoImage.png';
-import parteImage from '../assets/parteImage.png';
+
 
 
 
