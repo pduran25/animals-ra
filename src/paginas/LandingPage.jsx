@@ -8,23 +8,12 @@ import logoImage from '../assets/logoImage.png';
 
 const LandingPage = () => {
 
-  const [enviadoExitosamente, setEnviadoExitosamente] = useState(false);
- // const history = useHistory();
-  const [formData, setFormData] = useState({
-    nombres: '',
-    celular: '',
-    cuenta: '',// Valor predeterminado
-    ciudad: '', 
-    animacion: 0
-  });
+ 
   var source = "";
   var source2 = "";
 
   const search = window.location.search;
   const params = new URLSearchParams(search);
-  const codigo = params.get('animacion');
-  const paso = params.get('paso');
-  console.log("animacion numero: "+codigo);
 
 
 
