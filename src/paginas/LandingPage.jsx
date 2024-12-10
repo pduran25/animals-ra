@@ -61,23 +61,17 @@ const LandingPage = () => {
         <p style={{ textAlign: 'center', color: '#FFF'  }}>Gracias por registrarte. Tomate la foto con Guachito y súbelo a tu Instagram.</p>
         <div className="App" style={{ width: '100%', height: '100%' }}>
         <model-viewer
-  src={source}
-  ios-src={source2}
-  camera-controls
-  camera-orbit="-40deg 70deg 200m"
-  camera-target="0 0 0"
-  ar
-  ar-modes="scene-viewer webxr quick-look"
-  xr-environment
-  ar-placement="wall"
-  autoplay
->
-  <effect-composer id="selectiveComposer" render-mode="quality">
-    <selective-bloom-effect strength="5" radius="0.7" threshold="0"></selective-bloom-effect>
-    <color-grade-effect></color-grade-effect>
-  </effect-composer>
-
-
+          src={source}
+          ios-src={source2}
+          camera-controls
+          camera-orbit="-40deg 70deg 200m"
+          camera-target="0 0 0"
+          ar
+          ar-modes="scene-viewer webxr quick-look"
+          xr-environment
+          ar-placement="wall"
+          autoplay
+        >
 
 
           <Boton slot="ar-button">
@@ -86,7 +80,6 @@ const LandingPage = () => {
         </model-viewer>
       </div>
       </div></div>
-      
       </>
     
     
