@@ -71,10 +71,16 @@ const LandingPage = () => {
           xr-environment
           ar-placement="wall"
           autoplay
+          style={{
+            marginTop: '50px', 
+          }}
         >
 
 
-          <Boton slot="ar-button">
+          <Boton slot="ar-button" style={{
+            backgroundColor: 'blue', 
+            color: 'white'
+        }}>
             Ingresa
           </Boton>
         </model-viewer>
