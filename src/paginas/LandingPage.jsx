@@ -65,15 +65,12 @@ const LandingPage = () => {
           ios-src={source2}
           camera-controls
           camera-orbit="-40deg 70deg 200m"
-          camera-target="0 0 0"
+          camera-target="0 -50 0"
           ar
           ar-modes="scene-viewer webxr quick-look"
           xr-environment
           ar-placement="wall"
           autoplay
-          style={{
-            marginTop: '50px', 
-          }}
         >
 
 
