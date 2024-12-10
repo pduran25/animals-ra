@@ -68,10 +68,12 @@ const LandingPage = () => {
           camera-target="0 0 0"
           ar
           ar-modes="scene-viewer webxr quick-look"
+          exposure="1.5"
           xr-environment
           ar-placement="wall"
           auto-rotate
           auto-rotate-delay="2000"
+          autoplay
         >
 
 
