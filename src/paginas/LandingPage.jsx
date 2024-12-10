@@ -68,7 +68,6 @@ const LandingPage = () => {
           camera-target="0 0 0"
           ar
           ar-modes="scene-viewer webxr quick-look"
-          xr-environment
           ar-placement="wall"
           autoplay
         >
