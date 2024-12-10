@@ -20,7 +20,7 @@ const LandingPage = () => {
   source = "./assets/cub11.glb";
   source2 = "./assets/cub11.usdz";
 
-
+/*ok*/
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   const toggleAudio = () => {
