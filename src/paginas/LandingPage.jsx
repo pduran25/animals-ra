@@ -71,6 +71,8 @@ const LandingPage = () => {
           exposure="5"
           xr-environment
           ar-placement="wall"
+          auto-rotate
+          auto-rotate-delay="2000"
           autoplay
         >
 
