@@ -70,7 +70,7 @@ const LandingPage = () => {
           ar-modes="scene-viewer webxr quick-look"
           xr-environment
           interactive
-          environment-image="enviroment.jpg" 
+          environment-image="./assets/enviroment.jpg" 
           ar-placement="wall"
           autoplay
         >
