@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import backgroundImage from '../assets/fondocontecon.png';
+import backgroundImage from '../assets/fondoimagen.png';
 import logoImage from '../assets/logotipoconte.png';
 
 
