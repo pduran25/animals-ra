@@ -57,8 +57,8 @@ const LandingPage = () => {
         style={{ width: '100vw' }}
       />
       </div>
-        <h1 style={{ textAlign: 'center', color: '#001F3F' }}>¡Ingresa a nuestra Realidad Aumentada!</h1>
-        <p style={{ textAlign: 'center', color: '#001F3F'  }}>Y Experimenta la fortaleza de nuestra Marca.</p>
+        <h1 style={{ textAlign: 'center', color: '#e95328' }}>¡Ingresa a nuestra Realidad Aumentada!</h1>
+        <p style={{ textAlign: 'center', color: '#e95328'  }}>Y Experimenta la fortaleza de nuestra Marca.</p>
         <div className="App" style={{ width: '100%', height: '100%', marginTop: '50px' }}>
         <model-viewer
           src={source}
