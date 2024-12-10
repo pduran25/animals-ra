@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import backgroundImage from '../assets/fondofinal.png';
-import logoImage from '../assets/logoImage.png';
+import backgroundImage from '../assets/FONDOCONTECON.jpg';
+import logoImage from '../assets/logotipoconte.png';
 
 
 
@@ -57,8 +57,8 @@ const LandingPage = () => {
         style={{ width: '100vw' }}
       />
       </div>
-        <h1 style={{ textAlign: 'center', color: '#FFF' }}>¡Envío Exitoso!</h1>
-        <p style={{ textAlign: 'center', color: '#FFF'  }}>Gracias por registrarte. Tomate la foto con Guachito y súbelo a tu Instagram.</p>
+        <h1 style={{ textAlign: 'center', color: '#FFF' }}>¡Ingresa a nuestra Realidad Aumentada!</h1>
+        <p style={{ textAlign: 'center', color: '#FFF'  }}>Y Experimenta la fortaleza de nuestra Marca.</p>
         <div className="App" style={{ width: '100%', height: '100%' }}>
         <model-viewer
           src={source}
