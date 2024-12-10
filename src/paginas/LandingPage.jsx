@@ -59,13 +59,13 @@ const LandingPage = () => {
       </div>
         <h1 style={{ textAlign: 'center', color: '#FFF' }}>¡Ingresa a nuestra Realidad Aumentada!</h1>
         <p style={{ textAlign: 'center', color: '#FFF'  }}>Y Experimenta la fortaleza de nuestra Marca.</p>
-        <div className="App" style={{ width: '100%', height: '100%' }}>
+        <div className="App" style={{ width: '100%', height: '100%', marginTop: '50px' }}>
         <model-viewer
           src={source}
           ios-src={source2}
           camera-controls
           camera-orbit="-40deg 70deg 200m"
-          camera-target="0 -200 0"
+          camera-target="0 0 0"
           ar
           ar-modes="scene-viewer webxr quick-look"
           xr-environment
