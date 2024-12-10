@@ -17,8 +17,8 @@ const LandingPage = () => {
 
 
 
-  source = "./assets/cubo6.glb";
-  source2 = "./assets/cubo6.usdz";
+  source = "./assets/cub7.glb";
+  source2 = "./assets/cub7.usdz";
 
 
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
