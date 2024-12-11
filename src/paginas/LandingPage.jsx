@@ -67,7 +67,7 @@ const LandingPage = () => {
         style={{ width: '100vw' }}
       />
       </div>
-        <h1 style={{ textAlign: 'center', color: 'white', fontSize: '3em', WebkitTextStroke: '2px darkgray', letterSpacing: '-0.05em'   }}>BIENVENIDOS</h1>
+        <h1 style={{ textAlign: 'center', color: 'white', fontSize: '3.5em', WebkitTextStroke: '2px darkgray', letterSpacing: '-0.05em'   }}>BIENVENIDOS</h1>
         <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5em', fontWeight: 'bold', WebkitTextStroke: '1px darkgray', letterSpacing: '-0.05em'  }}>EXPERIMENTA LA SENSACIÓN DEL FRIO CON ESTE CUBO DE HIELO GIGANTE! DESCUBRE COMO LA REALIDAD AUMENTADA PUEDE TRANSFORMAR TU ALREDEDOR!</p>
         <div className="App" style={{ width: '100%', height: '100%', marginTop: '50px' }}>
         <model-viewer
