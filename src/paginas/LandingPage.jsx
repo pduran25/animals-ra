@@ -14,11 +14,21 @@ const LandingPage = () => {
 
   const search = window.location.search;
   const params = new URLSearchParams(search);
+  const codigo = params.get('animacion');
+ 
 
 
 
-  source = "./assets/cub13.glb";
-  source2 = "./assets/cub13.usdz";
+  source = "./assets/cub12.glb";
+  source2 = "./assets/cub12.usdz";
+
+  if(codigo == 1){
+    source = "./assets/cub12.glb";
+    source2 = "./assets/cub12.usdz";
+  }else if(codigo == 2){
+    source = "./assets/cub13.glb";
+    source2 = "./assets/cub13.usdz";
+  }
 
 /*ok*/
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
