@@ -59,8 +59,8 @@ const LandingPage = () => {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-      <div style={{ marginBottom: '20px' }}>
-        <div style={{ marginBottom: '20px' }}>
+      <div style={{ marginBottom: '0px' }}>
+        <div style={{ marginBottom: '0px' }}>
       <img
         src={logoImage}
         alt="Logo"
@@ -68,7 +68,7 @@ const LandingPage = () => {
       />
       </div>
         <h1 style={{ textAlign: 'center', color: 'white', fontSize: '3em', WebkitTextStroke: '2px darkgray'  }}>BIENVENIDOS</h1>
-        <p style={{ textAlign: 'center', color: '#e95328'  }}>Y Experimenta la fortaleza de nuestra Marca.</p>
+        <p style={{ textAlign: 'center', color: 'white', fontSize: '2em', WebkitTextStroke: '2px darkgray' }}>EXPERIMENTA LA SENSACIÓN DEL FRIO CON ESTE CUBO DE HIELO GIGANTE! DESCUBRE COMO LA REALIDAD AUMENTADA PUEDE TRANSFORMAR TU ALREDEDOR!</p>
         <div className="App" style={{ width: '100%', height: '100%', marginTop: '50px' }}>
         <model-viewer
           src={source}
