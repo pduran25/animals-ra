@@ -28,6 +28,9 @@ const LandingPage = () => {
   }else if(codigo == 2){
     source = "./assets/cub13.glb";
     source2 = "./assets/cub13.usdz";
+  }else if(codigo == 3){
+    source = "./assets/cubotallado1.glb";
+    source2 = "./assets/cubotallado1.usdz";
   }
 
 /*ok*/
