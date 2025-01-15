@@ -19,12 +19,12 @@ const LandingPage = () => {
 
 
 
-  source = "./assets/cub12.glb";
-  source2 = "./assets/cub12.usdz";
+  source = "./assets/loro.glb";
+  source2 = "./assets/loro.usdz";
 
   if(codigo == 1){
-    source = "./assets/cub12.glb";
-    source2 = "./assets/cub12.usdz";
+    source = "./assets/pinguino.glb";
+    source2 = "./assets/pinguino.usdz";
   }else if(codigo == 2){
     source = "./assets/cub13.glb";
     source2 = "./assets/cub13.usdz";
