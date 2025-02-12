@@ -26,11 +26,11 @@ const LandingPage = () => {
     source = "./assets/pinguino.glb";
     source2 = "./assets/pinguino.usdz";
   }else if(codigo == 2){
-    source = "./assets/cub13.glb";
-    source2 = "./assets/cub13.usdz";
+    source = "./assets/loro2.glb";
+    source2 = "./assets/loro1.usdz";
   }else if(codigo == 3){
-    source = "./assets/cubotallado1.glb";
-    source2 = "./assets/cubotallado1.usdz";
+    source = "./assets/tortuga1.glb";
+    source2 = "./assets/tortuga1.usdz";
   }
 
 /*ok*/
