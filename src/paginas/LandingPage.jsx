@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import backgroundImage from '../assets/fondo-hielo.png';
-import logoImage from '../assets/logo-hielo-dos.png';
+import backgroundImage from '../assets/fondoespecies.jpg';
+import logoImage from '../assets/especies.png';
 
 
 
