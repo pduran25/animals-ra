@@ -67,7 +67,7 @@ const LandingPage = () => {
       <img
         src={logoImage}
         alt="Logo"
-        style={{ width: '100vw' }}
+        style={{ width: '100vw', marginTop: '50px' }}
       />
       </div>
         <h1 style={{ textAlign: 'center', color: 'white', fontSize: '3.5em', textShadow: '1px 1px 2px darkgray', letterSpacing: '-0.05em'   }}>BIENVENIDOS</h1>
